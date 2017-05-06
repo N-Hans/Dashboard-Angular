@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { City } from './City';
+import { ICity } from './../entities/ICity';
 
 export interface IWeatherObject{
-    city : City;
+    city : ICity;
     cod : string;
     message : string;
     cnt : string;

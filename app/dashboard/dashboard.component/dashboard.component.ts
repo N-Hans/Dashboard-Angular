@@ -1,11 +1,9 @@
-import { Component, Injectable, Input, Output, OnInit } from '@angular/core';
-import { City } from './../../services/weather_service/City';
-import { Clock } from './../clock.component/clock.component';
-import { WeatherComponent } from './../weather.component/weather.component';
-import { CitiesList } from './../cities.list.component/cities.list.component';
-import { TodoComponent}  from './../todo.component/todo.component';
-import { Observable } from 'rxjs/Rx';
-
+import { Component, OnInit } from '@angular/core';
+import { ICity } from '../../entities/ICity';
+import { Clock } from '../clock.component/clock.component';
+import { WeatherComponent } from '../weather.component/weather.component';
+import { TodoComponent } from '../todo.component/todo.component';
+import { CitiesList } from '../cities.list.component/cities.list.component';
 
 @Component({
     selector: 'dashboard',
@@ -23,15 +21,9 @@ import { Observable } from 'rxjs/Rx';
 })
 export class Dashboard{
 
-    currentCity : City;
+    currentCity : ICity;
 
-    InitWeather(city:City){
+    InitWeather(city:ICity){
         this.currentCity = city;
     }
-    // ngOnInit(){
-    //     let timer = Observable.timer(2000,5000);
-    //     timer.subscribe(t=>{
-    //         console.log(this.currentCity.name)
-    //                });
-    // }
 }

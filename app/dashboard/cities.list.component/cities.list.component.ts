@@ -1,11 +1,12 @@
-import { Component, Injectable, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CitiesProvider } from './../../services/weather_service/CitiesProvider';
-import { City } from './../../services/weather_service/City';
+import { Component, Injectable, OnInit, Output, EventEmitter } from '@angular/core';
+import { CitiesProvider } from './../../services/cities_provider/CitiesProvider';
+import { ICity } from './../../entities/ICity';
 
 @Component({
     selector: 'citiesList',
     template: `<div align = 'center' class="select-style" >
                     <select (change)="onCityChange($event.target.value)" style="width: 30vw">
+                        <option value="" disabled selected>Select city for weather status</option>
                         <option *ngFor="let city of cities">{{city.name}}</option>
                     </select>
                </div>`
@@ -13,22 +14,16 @@ import { City } from './../../services/weather_service/City';
 
 @Injectable()
 export class CitiesList implements OnInit{
-    cities : City[];
+    cities : ICity[];
 
-    @Output() EmitCity = new EventEmitter<City>();
+    @Output() EmitCity = new EventEmitter<ICity>();
 
-    public targetCity : City;
+    public targetCity : ICity;
 
     constructor(private _cityProvider : CitiesProvider){}
     ngOnInit(){
         this._cityProvider.getCities()
             .subscribe(resCitiesData => this.cities = resCitiesData);
-        // while(this.cities==undefined){
-        //     console.log("waiting...");
-        //     setTimeout(()=>{}, 3000)
-        // }
-        // this.targetCity = this.cities[0];
-        // this.EmitCity.emit(this.targetCity);
     }
 
     onCityChange(cityName : string) {

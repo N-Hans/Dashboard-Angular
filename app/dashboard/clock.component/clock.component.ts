@@ -9,30 +9,32 @@ import { Observable } from 'rxjs/Rx';
                </div>`
 })
 export class Clock{
-    time : string;
-    date : string;
+time: string;
+date: string;
+
     ngOnInit(){
         let timer = Observable.timer(0, 1000);
         timer.subscribe(t=>{
+            let dateData = new Date();
+            this.time = dateData.toLocaleTimeString("en-GB");
             let dayOfWeek;
-            this.time = new Date().toLocaleTimeString();
-            switch (new Date().getDay()){
-                case 0: dayOfWeek = "Неділя";
+            switch (dateData.getDay()){
+                case 0: dayOfWeek = "Sunday";
                         break;
-                case 1: dayOfWeek = "Понеділок";
+                case 1: dayOfWeek = "Monday";
                         break;
-                case 2: dayOfWeek = "Вівторок";
+                case 2: dayOfWeek = "Tuesday";
                         break;
-                case 3: dayOfWeek = "Середа";
+                case 3: dayOfWeek = "Wednesday";
                         break;
-                case 4: dayOfWeek = "Четвер";
+                case 4: dayOfWeek = "Thursday";
                         break;
-                case 5: dayOfWeek = "П'ятниця";
+                case 5: dayOfWeek = "Friday";
                         break;
-                case 6: dayOfWeek = "Субота";
+                case 6: dayOfWeek = "Saturday";
                         break;
             }
-            this.date = new Date().toLocaleDateString() + " - " + dayOfWeek;
+            this.date = dateData.toLocaleDateString("en-GB") + " - " + dayOfWeek;
         });
     }
 }

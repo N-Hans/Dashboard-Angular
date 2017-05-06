@@ -1,8 +1,7 @@
-import { Component, Injectable, Input, OnInit, OnChanges } from '@angular/core';
-import { WeatherService } from './../../services/weather_service/weather_service';
-import { IWeatherObject, IWeatherRecord, IMainWeatherRecord, IWeatherDescription } from './../../services/weather_service/IWeatherRecord';
-import { City } from './../../services/weather_service/City';
-import { CitiesList } from './../cities.list.component/cities.list.component'
+import { Component, Injectable, Input, OnChanges } from '@angular/core';
+import { WeatherService } from './../../services/weather_service/WeatherService';
+import { IWeatherObject } from './../../entities/IWeatherRecord';
+import { ICity } from './../../entities/ICity';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -21,23 +20,24 @@ import { Observable } from 'rxjs/Rx';
 })
 @Injectable()
 export class WeatherComponent{
-weatherData : IWeatherObject;
+    weatherData : IWeatherObject;
 
-@Input()
-targetCity : City;
-constructor (private _weatherService : WeatherService){}
+    @Input()
+    targetCity : ICity;
+    constructor (private _weatherService : WeatherService){}
 
-InitWeather(city:City){
-    let timer = Observable.timer(0, 3600000);
-    timer.subscribe(t=>{
-       this._weatherService.GetWeather(city._id)
-           .subscribe(resWeatherData => this.weatherData = resWeatherData);
-    })
-}
-
-ngOnChanges(){
-    if (this.targetCity!=undefined){
-            this.InitWeather(this.targetCity);
+    InitWeather(city:ICity){
+        let timer = Observable.timer(0, 3600000);
+        timer.subscribe(t=>{
+        this._weatherService.GetWeather(city._id)
+            .subscribe(resWeatherData => this.weatherData = resWeatherData,
+            (error:Error)=> alert("there was an error getting weather data"));
+        })
     }
-}
+
+    ngOnChanges(){
+        if (this.targetCity!=undefined){
+                this.InitWeather(this.targetCity);
+        }
+    }
 }

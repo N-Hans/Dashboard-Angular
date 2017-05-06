@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IWeatherRecord } from './IWeatherRecord';
+import { IWeatherRecord } from './../../entities/IWeatherRecord';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -8,14 +8,13 @@ export class WeatherService{
     key = "25c948162ab81a7a7c76bb1a5c9bbcde";
     cityId : string;
     url(){
-        return "http://api.openweathermap.org/data/2.5/forecast/city?id=" 
+        return "http://api.openweathermap.org/data/2.5/forecast?id=" 
         + (this.cityId) 
             + "&APPID=" 
                 + (this.key) 
                     + "&units=metric";
     }
 
-    //url = "app/services/weather_service/weather.json"
     constructor(private _http : Http){}
     GetWeather(cityId : number){
         this.cityId = cityId.toString();
