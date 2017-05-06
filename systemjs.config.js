@@ -26,6 +26,5 @@
                 defaultExtension: 'js'
             }
         },
-		base-href: '/Dashboard-Angular/'
     });
 })(this);
