@@ -26,6 +26,6 @@
                 defaultExtension: 'js'
             }
         },
-	baseURL: '/Dashboard-Angular/'
+		baseURL: '/Dashboard-Angular/'
     });
 })(this);
