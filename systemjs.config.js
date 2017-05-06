@@ -19,13 +19,13 @@
         },
         packages: {
             app: {
-                main: 'main.js',
+                main: './main.js',
                 defaultExtension: 'js'
             },
             rxjs: {
                 defaultExtension: 'js'
             }
         },
-		baseURL: '/Dashboard-Angular/'
+		base-href: '/Dashboard-Angular/'
     });
 })(this);
